@@ -28,7 +28,7 @@
                     </a>
                     <ul class="submenu ">
                         <li class="submenu-item ">
-                            <a href="#">Adicionar Produto</a>
+                            <a href="{{route('product.create')}}">Adicionar Produto</a>
                         </li>
                         <li class="submenu-item ">
                             <a href="component-badge.html">Badge</a>

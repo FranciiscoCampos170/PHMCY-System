@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,3 +19,11 @@ Route::get('/', function () {
 });
 
 Route::view('home', 'dashboard')->name('home');
+
+Route::get('/product-create',function(){
+    return view('product.create');
+})->name('product.create');
+
+Route::post('/product-store',function (Request $request){
+    return $request;
+})->name('product.store');

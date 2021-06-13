@@ -16,7 +16,9 @@
     <link rel="stylesheet" href="{{asset('css/bootstrap-icons.css')}}">
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
     <link rel="shortcut icon" href="{{asset('images/favicon.svg')}}" type="image/x-icon">
+    @livewireStyles
 </head>
+
 
 <body>
 <div id="app">
@@ -36,6 +38,7 @@
 <script src="{{asset('js/dashboard.js')}}"></script>
 
 <script src="{{asset('js/main.js')}}"></script>
+@livewireScripts
 </body>
 
 </html>
