@@ -30,12 +30,13 @@
                         {{Session::get('success_message')}}.
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
+
                 @endif
             </div>
 
             <div class="card-body">
                 <div class="row">
-                <form wire:submit.prevent='submitProduct' class="form" action="{{route('product.store')}}" method="POST">
+                <form wire:submit.prevent='submitProduct' class="form" action="{{route('product.store')}}" method="POST" type="multipart">
                     @csrf
                     <div class="col-md-12">
                         <div class="form-group">
@@ -112,7 +113,7 @@
                         <div class="form-group">
                             <label for="description">Descrição</label>
                             <textarea class="form-control" id="description"
-                                      rows="3"></textarea>
+                                      rows="3" wire:model="description"></textarea>
                         </div>
                     </div>
                 </div>
@@ -120,13 +121,10 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="image">Imagem</label>
-                            <input class="form-control" type="file" id="image">
+                            <input class="form-control" type="file" id="image" wire:model="image">
                         </div>
                     </div>
                 </div>
-
-
-
             </div>
         </div>
 
@@ -140,22 +138,40 @@
                     <div class="col-md-6">
                             <fieldset class="form-group">
                                 <label for="category">Categoria</label>
-                                <select class="form-select" id="basicSelect">
-                                    <option>IT</option>
-                                    <option>Blade Runner</option>
-                                    <option>Thor Ragnarok</option>
+                                <select class="form-select @error('category_id') form-control is-invalid @enderror" id="basicSelect" wire:model="category_id" name="category_id">
+                                    <option></option>
+                                    @foreach($categories as $category)
+                                        <option value="{{$category->id}}">
+                                            {{$category->name}}
+                                        </option>
+                                    @endforeach
                                 </select>
+                                <div class="invalid-feedback">
+                                    <i class="bx bx-radio-circle"></i>
+                                    @error('category_id')
+                                    <p class="text-gray-600 text-xs italic">{{ $message }}</p>
+                                    @enderror
+                                </div>
                             </fieldset>
 
                     </div>
                     <div class="col-md-6">
                         <fieldset class="form-group">
                             <label for="brand">Marca</label>
-                            <select class="form-select" id="basicSelect">
-                                <option>IT</option>
-                                <option>Blade Runner</option>
-                                <option>Thor Ragnarok</option>
+                            <select class="form-select @error('brand_id') form-control is-invalid @enderror" id="basicSelect" wire:model="brand_id" name="brand_id">
+                                <option></option>
+                                @foreach($brands as $brand)
+                                    <option value="{{$brand->id}}">
+                                        {{$brand->name}}
+                                    </option>
+                                @endforeach
                             </select>
+                            <div class="invalid-feedback">
+                                <i class="bx bx-radio-circle"></i>
+                                @error('brand_id')
+                                <p class="text-gray-600 text-xs italic">{{ $message }}</p>
+                                @enderror
+                            </div>
                         </fieldset>
                     </div>
                 </div>
@@ -164,20 +180,29 @@
                     <div class="col-md-6">
                         <fieldset class="form-group">
                             <label for="category">Tipo</label>
-                            <select class="form-select" id="basicSelect">
-                                <option>IT</option>
-                                <option>Blade Runner</option>
-                                <option>Thor Ragnarok</option>
+                            <select class="form-select @error('type_id') form-control is-invalid @enderror" id="basicSelect" wire:model="type_id" name="type_id">
+                                <option></option>
+                                @foreach($types as $type)
+                                    <option value="{{$type->id}}">
+                                        {{$type->name}}
+                                    </option>
+                                @endforeach
                             </select>
+                            <div class="invalid-feedback">
+                                <i class="bx bx-radio-circle"></i>
+                                @error('type_id')
+                                <p class="text-gray-600 text-xs italic">{{ $message }}</p>
+                                @enderror
+                            </div>
                         </fieldset>
                     </div>
                     <div class="col-md-6">
                         <fieldset class="form-group">
                             <label for="brand">Unidade</label>
-                            <select class="form-select" id="basicSelect">
-                                <option>IT</option>
-                                <option>Blade Runner</option>
-                                <option>Thor Ragnarok</option>
+                            <select class="form-select" id="basicSelect" wire:model="unity" name="unity">
+                                <option></option>
+                                <option value="uni">Uni</option>
+                                <option value="kg">Kg</option>
                             </select>
                         </fieldset>
                     </div>
@@ -196,10 +221,6 @@
                     <button type="reset" class="btn btn-light-secondary me-1 mb-1">Limpar</button>
                 </div>
             </form>
-
-
-
-
 
             </div>
         </div>

@@ -18,6 +18,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('send-category', function(){
+    \App\Models\Type::create([
+        'name' => "Produto"
+    ]);
+
+    return true;
+});
+
 Route::view('home', 'dashboard')->name('home');
 
 Route::get('/product-create',function(){
