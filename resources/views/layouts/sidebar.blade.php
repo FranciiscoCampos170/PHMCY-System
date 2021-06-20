@@ -31,7 +31,7 @@
                             <a href="{{route('product.create')}}">Adicionar Produto</a>
                         </li>
                         <li class="submenu-item ">
-                            <a href="component-badge.html">Badge</a>
+                            <a href="{{route('product.index')}}">Todos os Produtos</a>
                         </li>
                         <li class="submenu-item ">
                             <a href="component-breadcrumb.html">Breadcrumb</a>

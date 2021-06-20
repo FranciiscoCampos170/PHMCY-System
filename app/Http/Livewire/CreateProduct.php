@@ -15,7 +15,7 @@ class CreateProduct extends Component
     public $product_name, $reference, $barCode,
            $quantity = 1, $alertQuantity = 1, $description,
            $image,$category_id,$brand_id,
-           $type_id,$unity;
+           $type_id,$unity, $price = 100.000;
 
     protected $rules = [
         'product_name' => 'required|min:2',
@@ -45,9 +45,10 @@ class CreateProduct extends Component
         $product->brand_id = $this->brand_id;
         $product->type_id = $this->type_id;
         $product->unity = $this->unity;
+        $product->price = $this->price;
         if (!empty($this->image))
         {
-            $filename = $product->id . $this->image->store('products');
+            $filename = $this->image->store('images', 'public');
             $product->image = $filename;
         }else{
             $product->image = $product->id . "product_default.jpg";

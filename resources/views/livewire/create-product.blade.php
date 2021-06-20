@@ -36,7 +36,7 @@
 
             <div class="card-body">
                 <div class="row">
-                <form wire:submit.prevent='submitProduct' class="form" action="{{route('product.store')}}" method="POST" type="multipart">
+                <form wire:submit.prevent='submitProduct' class="form" action="{{route('product.store')}}" method="POST" type="multipart" enctype="multipart/form-data">
                     @csrf
                     <div class="col-md-12">
                         <div class="form-group">

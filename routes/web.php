@@ -19,8 +19,8 @@ Route::get('/', function () {
 });
 
 Route::get('send-category', function(){
-    \App\Models\Type::create([
-        'name' => "Produto"
+    \App\Models\Category::create([
+        'name' => "Pills"
     ]);
 
     return true;
@@ -31,6 +31,10 @@ Route::view('home', 'dashboard')->name('home');
 Route::get('/product-create',function(){
     return view('product.create');
 })->name('product.create');
+
+Route::get('/product-list', function(){
+    return view('product.index');
+})->name('product.index');
 
 Route::post('/product-store',function (Request $request){
     return $request;
