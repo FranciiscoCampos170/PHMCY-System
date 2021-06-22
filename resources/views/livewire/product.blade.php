@@ -29,7 +29,39 @@
 
                 <div class="card-body">
                     <div class="row">
-                        <div class="table-responsive">
+                        <div class="col-md-4">
+                            <input class="dataTable-input" placeholder="Pesquisar...">
+                        </div>
+                        <div class="col-md-8">
+                            {{-- <button class="btn btn-outline-danger m-1 btn-sm" type="button">
+                                PDF
+                            </button>
+                            <button class="btn btn-outline-danger m-1 btn-sm" type="button">
+                                EXCEL
+                            </button>
+                            --}}
+                            <div class="float-end">
+                            <button class="btn btn-primary m-1" type="button">
+                                Importar produtos
+                            </button>
+                            <button class="btn btn-success m-1" type="button">
+                                Adicionar
+                            </button>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 mt-5">
+                            @if($deleteDisabled)
+                                <div class="alert alert-warning pb-10">
+                                    <b>({{count($selectedProducts)}}) Produtos selecionados</b>
+                                    <button class="float-end btn btn-danger" wire:click="deleteSelected">
+                                        Apagar
+                                    </button>
+                                </div>
+                            @endif
+
+                        </div>
+                        <div class="table-responsive mb-2">
                             <table class="table table-striped mb-0">
                                 <thead>
                                 <tr>
@@ -48,8 +80,10 @@
                                 <tr>
                                     @foreach($products as $product)
                                         <tr>
-                                            <td>#</td>
-                                            <td>*</td>
+                                            <td>
+                                                <input type="checkbox" class="" value="{{$product->id}}" wire:model="selectedProducts">
+                                            </td>
+                                            <td><img src="{{asset($product->image)}}" width="70" height="70" class="img-thumbnail img-fluid"></td>
                                             <td>{{$product->reference}}</td>
                                             <td>{{$product->name}}</td>
                                             <td>{{$product->price}}</td>
@@ -67,3 +101,4 @@
             </div>
         </section>
     </div>
+

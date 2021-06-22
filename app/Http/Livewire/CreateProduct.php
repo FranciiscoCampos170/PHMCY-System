@@ -51,7 +51,7 @@ class CreateProduct extends Component
             $filename = $this->image->store('images', 'public');
             $product->image = $filename;
         }else{
-            $product->image = $product->id . "product_default.jpg";
+            $product->image = "images/product_default.jpg";
         }
         $product->save();
 
