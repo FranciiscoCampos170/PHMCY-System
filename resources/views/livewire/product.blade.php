@@ -30,7 +30,10 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-4">
-                            <input class="dataTable-input" placeholder="Pesquisar...">
+                            <input class="dataTable-input"
+                                   placeholder="Pesquisar..."
+                                   wire:model='search'
+                                   id="search" type="search">
                         </div>
                         <div class="col-md-8">
                             {{-- <button class="btn btn-outline-danger m-1 btn-sm" type="button">
@@ -44,9 +47,9 @@
                             <button class="btn btn-primary m-1" type="button">
                                 Importar produtos
                             </button>
-                            <button class="btn btn-success m-1" type="button">
+                            <a  href="{{route('product.create')}}" class="btn btn-success m-1" type="button">
                                 Adicionar
-                            </button>
+                            </a>
                             </div>
                         </div>
 
@@ -90,15 +93,25 @@
                                             <td>{{$product->brand->name}}</td>
                                             <td>{{$product->category->name}}</td>
                                             <td>{{$product->quantity}}</td>
-                                            <td></td>
+                                            <td>
+                                                <button type="button" wire:click="edit({{$product->id}})" class="btn btn-warning btn-sm">
+                                                    Editar
+                                                </button>
+                                            </td>
                                         <tr>
                                     @endforeach
                                 </tr>
                                 </tbody>
                             </table>
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination">
+                                    <li class="page-item"> {{$products->links()}} </li>
+                                </ul>
+                            </nav>
                         </div>
                     </div>
             </div>
         </section>
+        @include('product.edit')
     </div>
 

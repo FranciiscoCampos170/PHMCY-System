@@ -39,3 +39,7 @@ Route::get('/product-list', function(){
 Route::post('/product-store',function (Request $request){
     return $request;
 })->name('product.store');
+
+Route::get('/product-edit/{product}', function (){
+    return view('product.edit');
+})->name('product.edit');
