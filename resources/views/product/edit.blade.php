@@ -1,5 +1,5 @@
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+<div class="modal fade bd-example-modal-lg" id="exampleModal" wire:ignore.self tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Editar produto</h5>
@@ -7,8 +7,10 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form wire:submit.prevent='submitProduct' class="form" action="{{route('product.store')}}" method="POST" type="multipart" enctype="multipart/form-data">
-            <div class="modal-body">
+            <form wire:submit.prevent='updateProduct'  class="form" action="{{route('product.update')}}" method="POST" type="multipart" enctype="multipart/form-data">
+                @method('update')
+                @csrf
+                <div class="modal-body">
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="basicInput">Nome do Produto</label>
@@ -22,7 +24,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-12">
+                    <div class="row">
+                    <div class="col-md-6">
                         <div class="form-group">
                             <label for="reference">Referência</label>
                             <input type="text" class="form-control @error('reference') form-control is-invalid @enderror" id="reference"
@@ -35,7 +38,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                         <div class="form-group">
                             <label for="barCode">Código de Barras</label>
                             <input type="text" class="form-control @error('barCode') form-control is-invalid @enderror" id="barCode"
@@ -48,7 +51,9 @@
                                     </div>
                         </div>
                     </div>
-                    <div class="col-md-12">
+                    </div>
+                <div class="row">
+                    <div class="col-md-6">
                         <div class="form-group">
                             <label for="qtd">Quantidade</label>
                             <input type="number" class="form-control @error('quantity') form-control is-invalid @enderror" id="qtd"
@@ -61,7 +66,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                         <div class="form-group">
                             <label for="qtd_alert">Quantidade de Alerta</label>
                             <input type="number" class="form-control @error('alertQuantity') form-control is-invalid @enderror" id="qtd_alert"
@@ -74,23 +79,28 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-12">
+                </div>
+                <div class="col-md-12">
                         <div class="form-group">
                             <label for="description">Descrição</label>
                             <textarea class="form-control" id="description"
                                       rows="3" wire:model="description"></textarea>
                         </div>
                     </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <img src="{{asset($image)}}" width="70" height="70" class="img-thumbnail img-fluid">
-                            <br>
-                            <label for="image">Imagem</label>
-                            <input class="form-control" type="file" id="image" wire:model="image">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img src="{{asset($image)}}" width="100" height="100" class="img-thumbnail img-fluid">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label for="image">Imagem</label>
+                                <input class="form-control" type="file" id="image" wire:model="image">
+                            </div>
                         </div>
                     </div>
 
-                    <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-6">
                         <fieldset class="form-group">
                             <label for="category">Categoria</label>
                             <select class="form-select @error('category_id') form-control is-invalid @enderror" id="basicSelect" wire:model="category_id" name="category_id">
@@ -110,7 +120,7 @@
                         </fieldset>
 
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                         <fieldset class="form-group">
                             <label for="brand">Marca</label>
                             <select class="form-select @error('brand_id') form-control is-invalid @enderror" id="basicSelect" wire:model="brand_id" name="brand_id">
@@ -129,7 +139,9 @@
                             </div>
                         </fieldset>
                     </div>
-                    <div class="col-md-12">
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
                         <fieldset class="form-group">
                             <label for="category">Tipo</label>
                             <select class="form-select @error('type_id') form-control is-invalid @enderror" id="basicSelect" wire:model="type_id" name="type_id">
@@ -148,7 +160,7 @@
                             </div>
                         </fieldset>
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                         <fieldset class="form-group">
                             <label for="brand">Unidade</label>
                             <select class="form-select" id="basicSelect" wire:model="unity" name="unity">
@@ -159,6 +171,7 @@
                         </fieldset>
                     </div>
                     </div>
+            </div>
                 <div class="col-sm-12 d-flex justify-content-end">
                     <button type="submit" class="btn btn-success me-1 mb-1">
                         <span>Gravar alterações</span>
@@ -170,7 +183,7 @@
                             </path>
                         </svg>
                     </button>
-                    <button type="reset" class="btn btn-light-secondary me-1 mb-1">Limpar</button>
+                    <button type="reset" class="btn btn-light-secondary me-1 mb-1" wire:click="closeEditProductModal">Cancelar</button>
                 </div>
                 <br>
             </div>

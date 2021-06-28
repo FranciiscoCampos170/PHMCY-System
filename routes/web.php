@@ -43,3 +43,7 @@ Route::post('/product-store',function (Request $request){
 Route::get('/product-edit/{product}', function (){
     return view('product.edit');
 })->name('product.edit');
+
+Route::patch('/product-update', function (Request $request){
+    return $request;
+})->name('product.update');

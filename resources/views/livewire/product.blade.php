@@ -92,7 +92,19 @@
                                             <td>{{$product->price}}</td>
                                             <td>{{$product->brand->name}}</td>
                                             <td>{{$product->category->name}}</td>
-                                            <td>{{$product->quantity}}</td>
+                                                @if($product->quantity === $product->alert_quantity || $product->quantity < $product->alert_quantity)
+                                                    <td>
+                                                        <span class="badge bg-danger">
+                                                            {{ $product->quantity }}
+                                                        </span>
+                                                    </td>
+                                                @else
+                                                   <td>
+                                                       <span class="badge bg-success">
+                                                            {{ $product->quantity }}
+                                                       </span>
+                                                   </td>
+                                                @endif
                                             <td>
                                                 <button type="button" wire:click="edit({{$product->id}})" class="btn btn-warning btn-sm">
                                                     Editar
