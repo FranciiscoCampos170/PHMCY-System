@@ -47,3 +47,7 @@ Route::get('/product-edit/{product}', function (){
 Route::patch('/product-update', function (Request $request){
     return $request;
 })->name('product.update');
+
+Route::get('/pos', function (){
+    return view('POS.index');
+})->name('pos');
