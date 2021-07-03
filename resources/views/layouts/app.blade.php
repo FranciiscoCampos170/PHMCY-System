@@ -20,7 +20,6 @@
     @livewireStyles
 </head>
 
-
 <body>
 <div id="app">
     @include('layouts.sidebar')
