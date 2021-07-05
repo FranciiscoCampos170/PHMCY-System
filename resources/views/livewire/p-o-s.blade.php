@@ -9,6 +9,9 @@
 
             <div class="header col-md-12" style="background-color: white; box-shadow: 0 5px 5px #ddd; width: 100%; !important;">
                 <span>Logo aqui!</span>
+                <span>
+                  botao -  Painel de dashboard
+                </span>
                 <div class="float-end">
                     <button class="btn btn-lg d-none d-sm-inline-block" id="fullscreen-btn" onclick="openFullscreen()">
                         <i class="fas fa-arrows-alt"></i>
@@ -34,7 +37,7 @@
         </div>
             <br>
        <div class="row">
-          <div class="col-md-6" style="background-color: white; box-shadow: 0 10px 5px #ccc;">
+          <div class="col-md-5" style="background-color: white; box-shadow: 0 10px 5px #ccc;">
             <div class="customer" style="padding: 15px; !important;">
                 <div class="col-md-12">
                     <div class="form-group">
@@ -53,7 +56,7 @@
             </div>
               <livewire:cart-product />
           </div>
-           <div class="col-md-6" style="box-shadow: 10px 0 5px #ccc;">
+           <div class="col-md-7" style="box-shadow: 10px 0 5px #ccc;">
                <div class="col-md-12" style="background-color: white; padding: 15px; !important;">
                    <div class="row">
                        <div class="col-md-6">
@@ -74,7 +77,7 @@
                        <div class="form-group position-relative has-icon-right">
                            <input type="text" class="form-control" placeholder="Escanear código de barras" style="background: #f3f4f6; border: 1px solid #9ca3af; color: #111827; padding: .375rem .75rem; font-size: .813rem; line-height: 1.5; border-radius: .25rem; transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out; !important;">
                            <div class="form-control-icon">
-                               <i class="bi bi-bookmarks"></i>
+                               <i class="fa fa-barcode" aria-hidden="true"></i>
                            </div>
                        </div>
                    </div>
@@ -85,38 +88,30 @@
                    </div>
                </div>
                </div>
-            <div class="col-md-12" id="products" style="background-color: white; padding: 15px; !important;">
+            <div class="col-md-12" id="products" style="background-color: white; padding-left: 30px; !important;">
                 <div class="row">
-
                     @foreach($products as $product)
-                        <div class="col-md-4">
-                            <a href="#" wire:click.prevent="addToCart({{$product->id}})">
-                            <div class="card card_product o-hidden bd-highlight m-1"  style="box-shadow: 0 0 0.5em #ddd; border-radius: 10px; min-height: 190px;">
-                                <div class="list-thumb d-flex">
-                                    <img alt="" src="{{asset($product->image)}}" class="w-100 h-100 card-img-top" style="max-height: 100px;">
-                                </div>
-                                <div class="flex-grow-1 d-bock">
-                                    <div class="card-body align-self-center d-flex flex-column justify-content-between align-items-lg-center">
-                                        <div class="w-40 w-sm-100 item-title">
-                                            <b>{{$product->name}}</b>
-                                        </div>
-                                        <p class="text-muted text-small w-15 w-sm-100 mb-2" style="padding-top: 10px; !important;">
-                                            {{$product->bar_code}}
-                                        </p>
-                                        <span class="badge bg-success w-15 w-sm-100 mb-2">
-                                            {{$product->price}} kz
-                                        </span>
 
-                                    </div>
-                                   {{--  <div class="card-footer text-muted">
-                                        <input type="checkbox" class="btn-check " id="{{$product->id}}" value="{{$product->id}}" autocomplete="off" wire:model="productsSelected">
-                                        <label class="btn btn-primary" for="{{$product->id}}">xvideos.com</label>
-                                    </div>
-                                    --}}
+                        <div class="col-md-3">
+                            <a href="#" wire:click.prevent="addToCart({{$product->id}})">
+                            <div class="card card_product" style="box-shadow: 0 0 0.5em #ddd; border-radius: 10px;
+                            width: 19%;
+                            max-width: 19%;
+                            height: 220px;
+                            max-height: 225px;
+                            min-width: 130px;
+                            min-height: 220px;">
+                                <img class="card-img-top" src="{{asset($product->image)}}" alt="Card image cap">
+                                <div class="card-body">
+                                    <h5 class="card-title" style="margin-top: -20px; font-size: 12pt;" >{{$product->name}}</h5>
+                                    <p class="card-text" style="font-size: 10pt;">{{$product->bar_code}}
+                                    <span class="badge bg-success w-15 w-sm-100" style="margin-top: 10px;">
+                                       {{$product->price}} kz
+                                    </span>
+                                    </p>
                                 </div>
                             </div>
                             </a>
-
                         </div>
                     @endforeach
                         <div class="mb-8 text-center" style="margin-top: 10px;">
