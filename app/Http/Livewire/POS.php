@@ -50,6 +50,6 @@ class POS extends Component
         return view('livewire.p-o-s', ['products' => \App\Models\Product::where(function($query){
             $query->where('name', 'like', '%'.$this->search.'%')
                   ->orWhere('reference', 'like','%'.$this->search.'%');
-        })->paginate(6)]);
+        })->paginate(8)]);
     }
 }
