@@ -56,13 +56,15 @@
             </div>
               <livewire:cart-product />
           </div>
+
            <div class="col-md-7" style="box-shadow: 10px 0 5px #ccc;">
                <div class="col-md-12" style="background-color: white; padding: 15px; !important;">
                    <div class="row">
                        <div class="col-md-6">
-                           <button class="btn btn-outline-primary mt-1 btn-block collapsed" aria-expanded="false" aria-controls="sidebar-category" style="overflow-anchor: none; border-color: #435ebe; padding: .5rem 1.25rem;"><i class="i-Two-Windows"></i>
+                           <button class="btn btn-outline-primary mt-1 btn-block collapsed" aria-expanded="false" aria-controls="sidebar-category" style="overflow-anchor: none; border-color: #435ebe; padding: .5rem 1.25rem;" wire:click="openCategory"><i class=""></i>
                                Lista de Categorias
                            </button>
+
                        </div>
                        <div class="col-md-6">
                            <button class="btn btn-outline-primary mt-1 btn-block collapsed" aria-expanded="false" aria-controls="sidebar-category" style="overflow-anchor: none; border-color: #435ebe; padding: .5rem 1.25rem;"><i class="i-Two-Windows"></i>
@@ -121,9 +123,8 @@
             </div>
         </div>
         </div>
-
     </div>
-
+    @include('product.categoryModal')
 </div>
 <script type="text/javascript">
     /* Get the documentElement (<html>) to display the page in fullscreen */

@@ -96,6 +96,10 @@
     window.addEventListener('closeEditProductModal', event => {
         $("#exampleModal").modal('hide');
     })
+
+    window.addEventListener('openCategoryModal', event => {
+        $("#exampleModalp").modal('show');
+    })
 </script>
 @livewireScripts
 </body>
