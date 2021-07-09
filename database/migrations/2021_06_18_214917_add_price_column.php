@@ -14,7 +14,7 @@ class AddPriceColumn extends Migration
     public function up()
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->decimal('price', 9,3);
+            $table->integer('price');
         });
     }
 
