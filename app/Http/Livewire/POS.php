@@ -24,11 +24,19 @@ class POS extends Component
     public function addToCart($productId)
     {
         $cart = Cart::where('product_id', $productId)->first();
-        if (!$cart) {
-            Cart::create(['product_id' => $productId, 'qtd' => 1]);
+        $item = \App\Models\Product::whereId($productId)->first();
+        if ($item->quantity < 1){
+            $this->dispatchBrowserEvent('openStockAlert');
         }else{
-            $cart->update(['qtd' => $cart->qtd + 1]);
+            $item->quantity = $item->quantity - 1;
+            $item->save();
+            if (!$cart) {
+                    Cart::create(['product_id' => $productId, 'qtd' => 1]);
+            }else{
+                $cart->update(['qtd' => $cart->qtd + 1]);
+            }
         }
+
         $this->emit('updateCart');
     }
 

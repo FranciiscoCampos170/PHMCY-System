@@ -68,6 +68,7 @@
             });
 
     });
+
 </script>
 <script src="{{{asset('js/perfect-scrollbar.min.js')}}}"></script>
 <script src="{{asset('js/bootstrap.bundle.min.js')}}"></script>
@@ -89,6 +90,17 @@
     })
     window.addEventListener('closeEditProductModal', event => {
         $("#exampleModal").modal('hide');
+    })
+    window.addEventListener('openCategoryModal', event => {
+        $("#listCategoryModal").modal('show');
+    })
+    window.addEventListener('openStockAlert', event => {
+        $("#stockAlert").prop('hidden', false);
+        window.setTimeout(function() {
+            $("#stockAlert").fadeTo(500, 0).slideUp(500, function(){
+                $(this).remove();
+            });
+        }, 2000);
     })
 </script>
 @livewireScripts

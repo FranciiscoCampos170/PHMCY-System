@@ -107,8 +107,9 @@
                                 <div class="card-body">
                                     <h5 class="card-title" style="margin-top: -20px; font-size: 12pt;" >{{$product->name}}</h5>
                                     <p class="card-text" style="font-size: 10pt;">{{$product->bar_code}}
-                                    <span class="badge bg-success w-15 w-sm-100" style="margin-top: 10px;">
-                                       {{$product->price}} kz
+                                        <br>
+                                        <span class="badge bg-success w-15 w-sm-100" style="margin-top: 10px;">
+                                       {{number_format($product->price)}} kz
                                     </span>
                                     </p>
                                 </div>

@@ -3,19 +3,34 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Selecionar categoria</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
+                    <div class="row">
                     @foreach($categories as $category)
-                        {{$category->name}}
+                        <div class="col-md-3">
+                             <a href="#">
+                                <div class="cat" style="height: 100px;
+                                                        margin: 5px;
+                                                        text-align: center;
+                                                        padding: 10px;
+                                                        border-radius: 10px;
+                                                        box-shadow: 0 0 5px #ddd;">
+                                    <img src="" alt="">
+                                    <h4>
+                                        {{$category->name}}
+                                    </h4>
+                                </div>
+                            </a>
+                        </div>
                     @endforeach
+                    </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+
                 </div>
             </div>
         </div>
