@@ -5,6 +5,11 @@
                 <span><b> {{$countProducts}} </b> Produto(s) adicionados </span>
             </div>
         @endif
+
+        <div class="alert alert-danger alert-dismissible" role="alert" id="stockAlert" hidden>
+             Produto com estoque baixo.
+        </div>
+
     </div>
     <div class="product" style="background-color: white; padding: 15px;">
         <div class="table-responsive" style="height: 40vh !important; max-height: 40vh !important;">
@@ -23,28 +28,29 @@
                 @forelse($cartItems as $item)
                     <tr>
                         <td>{{$item->name}}</td>
-                        <td>{{$item->price}}</td>
+                        <td>{{number_format($item->price)}}</td>
                         <td>
+
                             <div class="quantity">
                                 <div role="group" class="input-group"><!---->
                                     <div class="input-group-prepend">
                                         <button class="btn btn-primary btn-sm" wire:click="decreaseQuantity({{$item->id}})">-</button>
                                     </div>
-                                    <input class="form-control text-center" value="{{$item->qtd}}" style="width: 5px; !important;">
+                                    <input class="form-control text-center form-control-sm" value="{{$item->qtd}}" style="width: 5px; !important;">
                                     <div class="input-group-append">
                                         <button class="btn btn-primary btn-sm" wire:click="increaseQuantity({{$item->id}})"> + </button>
                                     </div><!----></div>
                             </div>
                         </td>
                         <td class="text-center">
-                            {{ $item->total }}
+                            {{ number_format($item->total) }}
                         </td>
                         <td>
                             {{-- <a href="#" class="btn btn-outline-danger rounded-pill btn-sm" wire:click.prevent="removeProduct({{$item->id}})">
                                 <b>x</b>
                             </a>
                             --}}
-                            <a href="#" class="text-sm" style="color:red; cursor: hand;" wire:click.prevent="removeProduct({{$item->id}})">
+                            <a href="#" class="text-sm" style="color:red; cursor: hand;" wire:click.prevent="removeProduct({{$item->id}}, '{{$item->qtd}}')">
                                 <i class="fa fa-trash text-xl"></i>
                             </a>
                         </td>
@@ -60,7 +66,7 @@
         <div class="total" style="background-color: white; padding: 15px; !important; position: relative;">
             <div style="background-color: #F2F7FF; padding: 10px;!important;" class="text-center">
                 <h6 style="font-size: 17pt;">
-                    <b>Total:</b> {{$total}} kz
+                    <b>Total:</b> {{number_format($total)}} kz
                 </h6>
             </div>
         </div>

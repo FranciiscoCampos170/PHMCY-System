@@ -8,17 +8,33 @@ use Livewire\Component;
 class CartProduct extends Component
 {
     protected $listeners = ['updateCart' => 'render'];
-
     public function increaseQuantity($id)
     {
         $product = Cart::where('product_id', $id)->first();
-        Cart::where('product_id',$id)->update(['qtd' => $product->qtd + 1]);
-        $this->emit('updateCart');
+        //avaliar quantidade do produto $qtd + 1
+
+        $item = \App\Models\Product::where('id', $id)->first();
+        if ($item->quantity > 0)
+        {
+            $item->quantity = $item->quantity - 1;
+            $item->save();
+            Cart::where('product_id',$id)->update(['qtd' => $product->qtd + 1]);
+            $this->emit('updateCart');
+        }else{
+            $this->dispatchBrowserEvent('openStockAlert');
+        }
+
         //$this->emit('increaseQuantity', $id);
     }
     public function decreaseQuantity($id)
     {
         $product = Cart::where('product_id', $id)->first();
+        $item = \App\Models\Product::whereId($id)->first();
+
+        $item->quantity = $item->quantity + 1;
+        $item->save();
+        //$this->showStockAlert = false;
+
         if ($product->qtd != 1)
         {
             Cart::where('product_id', $id)->update(['qtd' => $product->qtd - 1]);
@@ -28,9 +44,13 @@ class CartProduct extends Component
         $this->emit('updateCart');
     }
 
-    public function removeProduct($productId):void
+    public function removeProduct($productId, $qtd):void
     {
         Cart::where('product_id', $productId)->delete();
+        $item = \App\Models\Product::whereId($productId)->first();
+        $item->quantity = $item->quantity + $qtd;
+        $item->save();
+
         $this->emit('updateCart');
     }
     public function render()

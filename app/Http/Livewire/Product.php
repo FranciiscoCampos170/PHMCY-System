@@ -67,7 +67,7 @@ class Product extends Component
         $this->brand_id = $productInfo->brand_id;
         $this->type_id = $productInfo->type_id;
         $this->unity = $productInfo->unity;
-        $this->price = 100.000;
+        $this->price = 100000;
         $this->dispatchBrowserEvent('openModal');
     }
     public function deleteSelected()
@@ -77,6 +77,8 @@ class Product extends Component
             ->delete();
         $this->selectedProducts = [];
    }
+
+
 
 
    public function updateProduct(): void
