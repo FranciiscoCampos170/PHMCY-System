@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Cart;
+use App\Models\Category;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -12,9 +13,10 @@ class POS extends Component
     protected $paginationTheme = 'bootstrap';
     public $productsSelected = [];
     public $productsToSell;
-    public $subtotal;
+    public $category;
     public $search;
-    protected $queryString = ['search'];
+
+    protected $queryString = ['search', 'category'];
 
     public function mount()
     {
@@ -53,6 +55,11 @@ class POS extends Component
         $this->resetPage();
     }
 
+    public function seachByCategory()
+    {
+        $this->resetPage();
+    }
+
     public function openCategory()
     {
         $this->dispatchBrowserEvent('openCategoryModal');
@@ -62,7 +69,11 @@ class POS extends Component
     {
         return view('livewire.p-o-s', ['products' => \App\Models\Product::where(function($query){
             $query->where('name', 'like', '%'.$this->search.'%')
-                  ->orWhere('reference', 'like','%'.$this->search.'%');
-        })->paginate(8)]);
+                  ->orWhere('reference', 'like','%'.$this->search.'%')
+
+            ->when($this->category, function ($query){
+                $query->where('category_id', $this->category);
+            });
+        })->paginate(8), 'categories' => Category::all()]);
     }
 }
