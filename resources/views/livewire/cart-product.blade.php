@@ -89,13 +89,6 @@
                         </button>
                     </div>
                 </div>
-                {{-- <button class="btn btn-danger">
-                    Cancelar
-                </button>
-                <button class="btn btn-success">
-                    Efetuar pagamento
-                </button>
-                --}}
             </div>
         </div>
 
