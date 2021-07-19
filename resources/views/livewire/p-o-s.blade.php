@@ -17,7 +17,7 @@
                     <i class="fas fa-tachometer-alt px-2"></i>
                     Dashboard
                 </a>
-                <a href="#" class="btn-lg header-button rounded">
+                <a href="#" class="btn-lg header-button rounded" wire:click.prevent="addCustomer">
                     <i class="fas fa-user-circle px-2"></i>
                     Clientes
                 </a>
@@ -84,3 +84,5 @@
         </div>
     </div>
 </div>
+
+@include('POS.add_customer')
