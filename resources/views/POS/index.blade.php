@@ -94,6 +94,9 @@
     window.addEventListener('openCategoryModal', event => {
         $("#listCategoryModal").modal('show');
     })
+    window.addEventListener('addCustomer', event => {
+        $("#add_customer").modal('show');
+    })
     window.addEventListener('openStockAlert', event => {
         $("#stockAlert").prop('hidden', false);
         window.setTimeout(function() {

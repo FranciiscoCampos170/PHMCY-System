@@ -65,6 +65,11 @@ class POS extends Component
         $this->dispatchBrowserEvent('openCategoryModal');
     }
 
+    public function addCustomer()
+    {
+        $this->dispatchBrowserEvent('addCustomer');
+    }
+
     public function render()
     {
         return view('livewire.p-o-s', ['products' => \App\Models\Product::where(function($query){
