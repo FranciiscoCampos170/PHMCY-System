@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Cart;
 use App\Models\Category;
+use App\Models\Customer;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -15,8 +16,10 @@ class POS extends Component
     public $productsToSell;
     public $category;
     public $search;
+    public $customerSearch;
+    public $searchResults = [];
 
-    protected $queryString = ['search', 'category'];
+    protected $queryString = ['search', 'category', 'customerSearch'];
 
     public function mount()
     {
@@ -68,6 +71,21 @@ class POS extends Component
     public function addCustomer()
     {
         $this->dispatchBrowserEvent('addCustomer');
+    }
+
+    public function updatedCustomerSeach($newValue)
+    {
+        if (strlen($this->customerSeach) < 3)
+        {
+            $this->searchResults = [];
+            return;
+        }
+        $response = Customer::where(function ($query){
+            $query->where('name', 'like', '%'.$this->customerSearch.'%')
+                  ->orWhere('nif', 'like', '%'.$this->customerSearch.'%');
+        })->get();
+
+        $this->searchResults = $response->json()['results'];
     }
 
     public function render()

@@ -51,3 +51,17 @@ Route::patch('/product-update', function (Request $request){
 Route::get('/pos', function (){
     return view('POS.index');
 })->name('pos');
+
+
+Route::get('/create_customer', function(){
+   \App\Models\Customer::create([
+       'nif' => "5417368210",
+       'name' => "GQS",
+       'country_id' => 1,
+       'morada' => "Benguela",
+       'tel' => 946663197,
+       'email' => "empresa@gmail.com",
+       'website' => "www.google.com",
+       'observation' => "Minha observacao"
+   ]) ;
+});
