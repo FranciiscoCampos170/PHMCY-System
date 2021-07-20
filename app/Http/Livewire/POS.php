@@ -73,9 +73,9 @@ class POS extends Component
         $this->dispatchBrowserEvent('addCustomer');
     }
 
-    public function updatedCustomerSeach($newValue)
+    public function updatedCustomerSearch($newValue)
     {
-        if (strlen($this->customerSeach) < 3)
+        if (strlen($this->customerSearch) < 3)
         {
             $this->searchResults = [];
             return;
@@ -85,7 +85,8 @@ class POS extends Component
                   ->orWhere('nif', 'like', '%'.$this->customerSearch.'%');
         })->get();
 
-        $this->searchResults = $response->json()['results'];
+        $this->searchResults = $response;
+        //dump($this->searchResults);
     }
 
     public function render()
