@@ -30,7 +30,6 @@
         <hr>
         <div class="row">
             <div class="col-md-6  bg-white flex-auto flex overflow-hidden" style="box-shadow: 0 0 3px 1px rgba(0,0,0,0.3);">
-
                 <livewire:cart-product />
             </div>
             <div class="col-md-6  bg-white flex-auto flex overflow-hidden" style="box-shadow: 0 0 3px 1px rgba(0,0,0,0.3);">

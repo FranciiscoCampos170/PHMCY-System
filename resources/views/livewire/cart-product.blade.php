@@ -40,6 +40,10 @@
                                     <div class="input-group-append">
                                         <button class="btn btn-primary btn-sm" wire:click="increaseQuantity({{$item->id}})"> + </button>
                                     </div><!----></div>
+
+                                <a href="#">
+                                    {{$item->qtd}}
+                                </a>
                             </div>
                         </td>
                         <td class="text-center">
@@ -63,12 +67,17 @@
                 </tbody>
             </table>
         </div>
-        <div class="total" style="background-color: white; padding: 15px; !important; position: relative;">
-            <div style="background-color: #F2F7FF; padding: 10px;!important;" class="text-center">
-                <h6 style="font-size: 17pt;">
-                    <b>Total:</b> {{number_format($total)}} kz
-                </h6>
-            </div>
+        <div class="customer-info" style="margin-top: 10px;">
+            <table class="table table-bordered">
+                <tr>
+                    <td style="font-size: 13pt;">
+                        <b>Total:</b>
+                    </td>
+                    <td style="font-size: 13pt;">
+                        {{number_format($total)}} kz
+                    </td>
+                </tr>
+            </table>
         </div>
         <div style="position:relative; !important;">
             <div class="controls text-center" style="background-color: white; padding: 15px; !important; bottom: 0">
@@ -94,5 +103,3 @@
 
     </div>
 </div>
-
-
