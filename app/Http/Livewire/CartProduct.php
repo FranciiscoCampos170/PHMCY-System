@@ -74,7 +74,9 @@ class CartProduct extends Component
             {
                 if ($this->productQtd <= $item->quantity)
                 {
+                    //restaurar aquele que gera de primeira
                     $item->quantity -= $this->productQtd;
+                    ++$item->quantity;
                     $item->save();
                     Cart::where('product_id',$id)->update(['qtd' => $this->productQtd]);
                     $this->emit('updateCart');
@@ -91,7 +93,7 @@ class CartProduct extends Component
     {
         Cart::where('product_id', $productId)->delete();
         $item = \App\Models\Product::whereId($productId)->first();
-        $item->quantity = $item->quantity + $qtd;
+        $item->quantity += $qtd;
         $item->save();
 
         $this->emit('updateCart');
