@@ -13,14 +13,14 @@
     </div>
     <div class="product" style="background-color: white; padding: 15px;">
         <div class="table-responsive" style="height: 40vh !important; max-height: 40vh !important;">
-            <table class="table table-striped mb-0">
-                <thead>
+            <table class="table mb-0 table-bordered">
+                <thead style="background-color: rgba(243,244,246) !important;">
                 <tr>
-                    <th>Produto</th>
-                    <th>Preço</th>
-                    <th>Quantidade</th>
+                    <th scope="col">Produto</th>
+                    <th scope="col">Preço</th>
+                    <th scope="col">Quantidade</th>
                     <th class="text-center">Subtotal</th>
-                    <th></th>
+                    <th scope="col"></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -29,24 +29,25 @@
                     <tr>
                         <td>{{$item->name}}</td>
                         <td>{{number_format($item->price)}}</td>
+
                         <td>
 
-                            <div class="quantity">
+                            {{--<div class="quantity text-center">
                                 <div role="group" class="input-group"><!---->
-                                    <div class="input-group-prepend">
+                                      <div class="input-group-prepend">
                                         <button class="btn btn-primary btn-sm" wire:click="decreaseQuantity({{$item->id}})">-</button>
                                     </div>
                                     <input class="form-control text-center form-control-sm" value="{{$item->qtd}}" style="width: 5px; !important;">
                                     <div class="input-group-append">
                                         <button class="btn btn-primary btn-sm" wire:click="increaseQuantity({{$item->id}})"> + </button>
                                     </div><!----></div>
-
-                                <a href="#" wire:click="addQuantityModal({{$item->id}})">
+                            </div>--}}
+                            <a href="#" wire:click.prevent="addQuantityModal({{$item->id}})">
+                                <div style="height:100%;width:100%;" class="text-center">
                                     {{$item->qtd}}
-                                </a>
+                                </div>
+                            </a>
 
-
-                            </div>
                         </td>
                         <td class="text-center">
                             {{ number_format($item->total) }}
