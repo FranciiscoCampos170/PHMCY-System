@@ -8,6 +8,8 @@ use Livewire\Component;
 class CartProduct extends Component
 {
     protected $listeners = ['updateCart' => 'render'];
+    public $productQtd = 0;
+    public $productId = 0;
     public function increaseQuantity($id)
     {
         $product = Cart::where('product_id', $id)->first();
@@ -44,6 +46,47 @@ class CartProduct extends Component
         $this->emit('updateCart');
     }
 
+    public function addQuantityModal($id)
+    {
+        $cartItem = Cart::where('product_id', $id)->first();
+        $this->productQtd = $cartItem->qtd;
+        $this->productId = $id;
+        $this->dispatchBrowserEvent('openAddQuantityModal');
+    }
+
+    public function changeQuantity($qtd)
+    {
+        $this->productQtd .= $qtd;
+    }
+
+    public function increaseOrDecreaseQuantity($id)
+    {
+        //1 - qtd nao pode ser igual a 0
+        //2 - avaliar a qtd se for maior a stock
+        //limpar a tela sempre que introduzir o numero
+        if ($this->productQtd !== 0)
+        {
+            $product = Cart::where('product_id', $id)->first();
+
+            $item = \App\Models\Product::where('id', $id)->first();
+
+            if ($item->quantity > 0)
+            {
+                if ($this->productQtd <= $item->quantity)
+                {
+                    $item->quantity -= $this->productQtd;
+                    $item->save();
+                    Cart::where('product_id',$id)->update(['qtd' => $this->productQtd]);
+                    $this->emit('updateCart');
+                }else{
+                    $this->dispatchBrowserEvent('openStockAlert');
+                }
+            }
+        }
+
+        $this->emit('updateCart');
+        $this->dispatchBrowserEvent('closeAddQuantityModal');
+    }
     public function removeProduct($productId, $qtd):void
     {
         Cart::where('product_id', $productId)->delete();
@@ -55,6 +98,7 @@ class CartProduct extends Component
     }
     public function render()
     {
+
         $countProducts = Cart::count();
         $cartItems = Cart::Join('products', 'products.id', '=', 'carts.product_id')
                             ->get()
@@ -68,6 +112,8 @@ class CartProduct extends Component
                                 ];
                             });
         $total = $cartItems->sum('total');
+
+
         return view('livewire.cart-product', compact('cartItems','countProducts', 'total'));
     }
 }

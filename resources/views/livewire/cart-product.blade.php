@@ -41,9 +41,11 @@
                                         <button class="btn btn-primary btn-sm" wire:click="increaseQuantity({{$item->id}})"> + </button>
                                     </div><!----></div>
 
-                                <a href="#">
+                                <a href="#" wire:click="addQuantityModal({{$item->id}})">
                                     {{$item->qtd}}
                                 </a>
+
+
                             </div>
                         </td>
                         <td class="text-center">
@@ -102,4 +104,5 @@
         </div>
 
     </div>
+@include('POS.add_quantity')
 </div>

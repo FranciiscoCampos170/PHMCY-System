@@ -97,6 +97,14 @@
     window.addEventListener('addCustomer', event => {
         $("#add_customer").modal('show');
     })
+
+    window.addEventListener('openAddQuantityModal', evt => {
+        $("#addQuantityModal").modal('show');
+    })
+
+    window.addEventListener('closeAddQuantityModal', event => {
+        $("#addQuantityModal").modal('hide');
+    })
     window.addEventListener('openStockAlert', event => {
         $("#stockAlert").prop('hidden', false);
         window.setTimeout(function() {
