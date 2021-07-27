@@ -83,10 +83,17 @@ class CartProduct extends Component
         $this->emit('updateCart');
         $this->dispatchBrowserEvent('closeAddQuantityModal');
     }
-    public function closeAddQuantityModal()
+    public function closeAddQuantityModal(): void
     {
         $this->dispatchBrowserEvent('closeAddQuantityModal');
     }
+
+    public function clearQtdInput($qtd): void
+    {
+        dd($qtd);
+        //$this->productQtd = "";
+    }
+
     public function removeProduct($productId, $qtd):void
     {
         Cart::where('product_id', $productId)->delete();
