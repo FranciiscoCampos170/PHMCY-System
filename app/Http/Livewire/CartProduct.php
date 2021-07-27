@@ -10,6 +10,7 @@ class CartProduct extends Component
     protected $listeners = ['updateCart' => 'render'];
     public $productQtd = 0;
     public $productId = 0;
+    public $oldQtd = 0;
     public function increaseQuantity($id)
     {
         $product = Cart::where('product_id', $id)->first();
@@ -57,11 +58,8 @@ class CartProduct extends Component
         $this->productQtd .= $qtd;
     }
 
-    public function increaseOrDecreaseQuantity($id)
+    public function increaseOrDecreaseQuantity($id, $oldQtd)
     {
-        //1 - qtd nao pode ser igual a 0
-        //2 - avaliar a qtd se for maior a stock
-        //limpar a tela sempre que introduzir o numero
         if ($this->productQtd !== 0)
         {
             $product = Cart::where('product_id', $id)->first();
@@ -88,10 +86,28 @@ class CartProduct extends Component
         $this->dispatchBrowserEvent('closeAddQuantityModal');
     }
 
-    public function clearQtdInput($qtd): void
+    public function clearQtdInput($productId, $qtd, $oldQtd): void
     {
-        dd($qtd);
-        //$this->productQtd = "";
+        /*$item->quantity = $item->quantity - 1;
+        $item->save();
+        Cart::where('product_id',$id)->update(['qtd' => $product->qtd + 1]);*/
+
+        $item = \App\Models\Product::whereId($productId)->first();
+        $cartItem = Cart::where('product_id', $productId)->first();
+
+        $cartItem->qtd  += $oldQtd;
+        $item->quantity += $oldQtd;
+        $item->save();
+        $cartItem->save();
+
+        $cartItem->qtd -= $qtd;
+        $item->quantity -= $qtd;
+        $cartItem->save();
+        $item->save();
+
+        $this->emit('updateCart');
+
+        $this->productQtd = "";
     }
 
     public function removeProduct($productId, $qtd):void

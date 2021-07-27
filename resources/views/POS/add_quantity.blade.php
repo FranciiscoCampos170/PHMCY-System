@@ -10,8 +10,9 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-md-12 border p-3 text-center">
+                    <div class="col-md-12 border p-3 text-center" style="min-height: 200px">
                         <h3> {{$productQtd}} </h3>
+
                     </div>
                 </div>
                 <div class="row">
@@ -49,13 +50,13 @@
                     </a>
                 </div>
                 <div class="row">
-                    <a href="#" wire:click.prevent="clearQtdInput({{$productQtd}})" class="col-md-4 text-center border p-3" style="color: black;font-size: 14pt; font-weight: bold; !important;">
+                    <a href="#" wire:click.prevent="clearQtdInput({{$productId}},'{{$productQtd}}', '{{$oldQtd}}')" class="col-md-4 text-center border p-3" style="color: black;font-size: 14pt; font-weight: bold; !important;">
                         del {{$productQtd}}
                     </a>
                     <a href="#" wire:click.prevent="changeQuantity(0)" class="col-md-4 text-center border p-3" style="color: black;font-size: 14pt; font-weight: bold; !important;">
                         0
                     </a>
-                    <a href="#" wire:click.prevent="increaseOrDecreaseQuantity({{$productId}})" class="col-md-4 text-center border p-3" style="color: black;font-size: 14pt; font-weight: bold; !important;">
+                    <a href="#" wire:click.prevent="increaseOrDecreaseQuantity({{$productId}}, '{{$oldQtd}}')" class="col-md-4 text-center border p-3" style="color: black;font-size: 14pt; font-weight: bold; !important;">
                         enter
                     </a>
                 </div>
