@@ -49,8 +49,8 @@
                     </a>
                 </div>
                 <div class="row">
-                    <a href="#" class="col-md-4 text-center border p-3" style="color: black;font-size: 14pt; font-weight: bold; !important;">
-                        del
+                    <a href="#" wire:click.prevent="clearQtdInput({{$productQtd}})" class="col-md-4 text-center border p-3" style="color: black;font-size: 14pt; font-weight: bold; !important;">
+                        del {{$productQtd}}
                     </a>
                     <a href="#" wire:click.prevent="changeQuantity(0)" class="col-md-4 text-center border p-3" style="color: black;font-size: 14pt; font-weight: bold; !important;">
                         0

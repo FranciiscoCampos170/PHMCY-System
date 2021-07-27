@@ -29,7 +29,6 @@
                     <tr>
                         <td>{{$item->name}}</td>
                         <td>{{number_format($item->price)}}</td>
-
                         <td>
 
                             {{--<div class="quantity text-center">
