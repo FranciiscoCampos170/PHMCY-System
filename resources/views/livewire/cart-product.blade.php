@@ -30,7 +30,7 @@
                         <td>{{$item->name}}</td>
                         <td>{{number_format($item->price)}}</td>
                         <td>
-
+                            @php $oldQtd = $item->qtd @endphp
                             {{--<div class="quantity text-center">
                                 <div role="group" class="input-group"><!---->
                                       <div class="input-group-prepend">
